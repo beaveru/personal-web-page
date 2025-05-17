@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>beaverU - Personal Page</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+</head>
+
+<body>
+    <header>
+        <h1>beaverU</h1>
+        <p> Web Developer, Student, Dog Enthusiast</p>
+    </header>
+
+    <nav>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+        <!-- Add more links if you have more sections -->
+    </nav>
+
+    <main>
+        <section id="about">
+            <h2>About Me</h2>
+            <img src="images/image.webp" alt="Your Name" class="profile-photo"
+                style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; display: block; margin: 0 auto 20px;">
+            <!-- If you don't have a photo, remove the <img> tag -->
+            <p>Hello! I'm beaverU. I am passionate about new technology.
+                [Add another sentence or two about yourself, your goals, or what you do.]
+            </p>
+        </section>
+
+        <section id="skills">
+            <h2>Skills & Interests</h2>
+            <ul>
+                <li>Skill/Interest 1 (e.g., Web Development)</li>
+                <li>Skill/Interest 2 (e.g., Graphic Design)</li>
+                <li>Skill/Interest 3 (e.g., Hiking)</li>
+                <li>Skill/Interest 4 (e.g., Python Programming)</li>
+            </ul>
+        </section>
+
+        <section id="projects">
+            <h2>Projects (Optional)</h2>
+            <p>Here are a few things I've worked on:</p>
+            <ul>
+                <li><a href="#" target="_blank">Project 1 Name</a> - Brief description.</li>
+                <li><a href="#" target="_blank">Project 2 Name</a> - Brief description.</li>
+            </ul>
+            <p>If you don't have projects yet, you can remove this whole section or comment it out.</p>
+        </section>
+
+        <section id="contact">
+            <h2>Contact Me</h2>
+            <p>You can reach me via:</p>
+            <ul>
+                <li>Email: <a href="mailto:your.email@example.com">your.email@example.com</a></li>
+                <li>LinkedIn: <a href="https://linkedin.com/in/yourprofile" target="_blank">Your LinkedIn Profile</a>
+                </li>
+                <li>GitHub: <a href="https://github.com/yourusername" target="_blank">Your GitHub Profile</a></li>
+                <!-- Add other contact methods if you like -->
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>© <span id="currentYear"></span> Your Name. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+    </script>
+</body>
+
+</html>
