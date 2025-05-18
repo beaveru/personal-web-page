@@ -1,0 +1,15 @@
+---
+- name: Setting up server environment
+  hosts: web-servers
+  become: true
+
+  tasks:
+  - name: Upgrade all system packages
+      ansible.builtin.apt:
+        name: "*"
+        state: latest
+        update_cache: yes
+        
+  - name: Install podman
+    ansible.builtin.apt:
+      name: podman
