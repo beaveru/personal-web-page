@@ -5,7 +5,7 @@
 
   tasks:
   - name: Upgrade all system packages
-      ansible.builtin.apt:
+      ansible.builtin.package:
         name: "*"
         state: latest
         update_cache: yes
@@ -22,7 +22,7 @@
         dest: /etc/apt/apt.conf.d/50unattended-upgrades
 
   - name: Install podman and podman-compose
-    ansible.builtin.apt:
+    ansible.builtin.package:
       name: 
         - docker.io
 
