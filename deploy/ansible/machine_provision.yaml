@@ -21,11 +21,6 @@
         src: /deploy/ansible/templates/50unattended-upgrades.j2
         dest: /etc/apt/apt.conf.d/50unattended-upgrades
 
-  - name: Install podman and podman-compose
-    ansible.builtin.package:
-      name: 
-        - docker.io
-
   - name: Run website container
     community.docker.docker_compose_v2:
       project_src: deploy/docker/

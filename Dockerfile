@@ -4,12 +4,11 @@ LABEL maintainer="beaverU johndoe8@duck.com"
 
 WORKDIR /www/data
 
-COPY . .
+COPY src/ .
+
+COPY deploy/nginx/nginx.conf /etc/nginx
 
 EXPOSE 443
 EXPOSE 80
 
-RUN useradd web
-USER web
-
-CMD ["nginx", "-g"]
+CMD ["nginx", "-g", "daemon off;"]
