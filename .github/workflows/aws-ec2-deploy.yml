@@ -11,7 +11,8 @@ env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: ghcr.io
   # github.repository as <account>/<repo>
-  IMAGE_NAME: ${{ toLower(github.repository) }}
+  IMAGE_NAME: ${{ github.repository }}
+  IMAGE_TAG: latest
 
 jobs:
   deploy:
@@ -42,8 +43,12 @@ jobs:
       run: |
         ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
           sudo docker login ${{ env.REGISTRY }} -u '${{ github.actor }}' -p '${{ secrets.GITHUB_TOKEN }}'
-          sudo docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          sudo docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
           sudo docker stop ${{ env.IMAGE_NAME }} || true
           sudo docker rm ${{ env.IMAGE_NAME }} || true
-          sudo docker run -d --name ${{ env.IMAGE_NAME }} -p 80:80 ${{ env.REGISTRY }}/${{ toLower(github.actor) }}/${{ env.IMAGE_NAME }}:latest
+          sudo docker run \
+                      -d \
+                      --name ${{ env.IMAGE_NAME }} \
+                      -p 80:80 \
+                      ${{ env.REGISTRY }}/beaveru/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
         EOF
