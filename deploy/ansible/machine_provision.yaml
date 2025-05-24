@@ -1,0 +1,28 @@
+---
+- name: Setting up server environment
+  hosts: web-servers
+  become: true
+
+  tasks:
+  - name: Upgrade all system packages
+      ansible.builtin.package:
+        name: "*"
+        state: latest
+        update_cache: yes
+
+  - name: Unnatended upgrades setting up
+      ansible.builtin.shell:
+        cmd: |
+              echo unattended-upgrades unattended-upgrades/enable_auto_updates boolean true | debconf-set-selections && \
+              dpkg-reconfigure -f noninteractive unattended-upgrades
+
+  - name: Copy unattended-upgrades config file
+      ansible.builtin.template:
+        src: /deploy/ansible/templates/50unattended-upgrades.j2
+        dest: /etc/apt/apt.conf.d/50unattended-upgrades
+
+  - name: Run website container
+    community.docker.docker_compose_v2:
+      project_src: deploy/docker/
+      state: present
+    

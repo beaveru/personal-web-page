@@ -1,0 +1,59 @@
+---
+- name: Update apt cache (for Debian/Ubuntu)
+  ansible.builtin.apt:
+    update_cache: yes
+    cache_valid_time: 3600
+  when: ansible_os_family == "Debian"
+  become: true
+
+- name: Install prerequisites for Docker (for Debian/Ubuntu)
+  ansible.builtin.apt:
+    name:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - gnupg
+      - lsb-release
+    state: present
+  when: ansible_os_family == "Debian"
+  become: true
+
+- name: Add Docker GPG key (for Debian/Ubuntu)
+  ansible.builtin.apt_key:
+    url: "{{ docker_package_repository_link }}/gpg"
+    state: present
+  when: ansible_os_family == "Debian"
+  become: true
+
+- name: Add Docker repository (for Debian/Ubuntu)
+  ansible.builtin.apt_repository:
+    repo: "deb [arch=amd64] {{ docker_package_repository_link }} {{ ansible_distribution_release }} stable"
+    state: present
+    filename: docker
+  when: ansible_os_family == "Debian"
+  become: true
+
+- name: Install Docker Engine and Docker Compose
+  ansible.builtin.package: # Generic package module
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-buildx-plugin  # For docker buildx
+      - docker-compose-plugin # For docker compose V2
+    state: present
+  become: true
+  notify: Restart Docker Service # Handler to ensure service is running
+
+- name: Ensure Docker service is started and enabled
+  ansible.builtin.service:
+    name: docker
+    state: started
+    enabled: yes
+  become: true
+
+- name: Login into Docker Hub
+  community.docker.docker_login:
+    username: {{ docker_hub_login }}
+    password: {{ docker_hub_password }}
+
