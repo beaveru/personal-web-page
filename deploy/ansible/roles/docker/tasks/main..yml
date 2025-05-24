@@ -20,7 +20,7 @@
 
 - name: Add Docker GPG key (for Debian/Ubuntu)
   ansible.builtin.apt_key:
-    url: {{ docker_package_repository_link }}/gpg
+    url: "{{ docker_package_repository_link }}/gpg"
     state: present
   when: ansible_os_family == "Debian"
   become: true
