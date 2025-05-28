@@ -3,16 +3,7 @@ name: User story
 about: The template is for creating stories
 title: ''
 labels: ''
-assignees: ''
-
----
-
----
-name: User story
-about: The template is for creating stories
-title: ''
-labels: ''
-assignees: ''
+assignees: beaveru
 
 ---
 
