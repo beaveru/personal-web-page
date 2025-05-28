@@ -46,7 +46,7 @@ jobs:
           sudo docker login ${{ env.REGISTRY }} -u '${{ github.actor }}' -p '${{ secrets.GITHUB_TOKEN }}'
           sudo docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
           sudo docker stop ${{ env.CONTAINER_NAME }} || true
-          sudo docker rm ${{ env.CONTAINER_NAME }} || true
+          sudo docker rm -f ${{ env.CONTAINER_NAME }} || true
           sudo docker run \
                       -d \
                       --name ${{ env.CONTAINER_NAME }} \
