@@ -1,0 +1,21 @@
+version: "3ю8"
+name: personal-web-site
+services:
+  web-site:
+    image: ghcr.io/beaveru/personal-web-page:main
+    ports:
+    - "80:80"
+    - "443:443"
+    volumes:
+      - "/etc/letsencrypt:/etc/letsencrypt:ro"
+      - "/usr/share/nginx/html:/www/data:rw"
+  letsencrypt:
+    image: docker.io/certbot/dns-cloudflare
+    volumes:
+      - "/etc/letsencrypt/:/etc/letsencrypt:rw"
+      - "/var/lib/letsencrypt:/var/lib/letsencrypt"
+    entrypoint: >
+      certbot certonly
+      --dns-cloudflare \
+      --dns-cloudflare-credentials ~/.secrets/certbot/cloudflare.ini
+  
