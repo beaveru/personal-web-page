@@ -3,10 +3,16 @@ name: Docker build and push to GitHub registry
 on:
   push:
     branches: [ "main" ]
+    paths:
+      - 'src/**'
+      - 'Dockerfile'
     # Publish semver tags as releases.
     tags: [ 'v*.*.*' ]
   pull_request:
     branches: [ "main" ]
+    paths:
+      - 'src/**'
+      - 'Dockerfile'
 
 env:
   # Use docker.io for Docker Hub if empty
