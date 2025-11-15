@@ -143,6 +143,7 @@ This project is organized around real-world DevOps workflows. Each milestone foc
 - Containerized with Nginx
 - Delivered to AWS EC2 (plain virtual machine)
 - Simple CI/CD that builds container and pushes it to VM on commit to main branch
+- Some new step
 
 ## Next steps
 
